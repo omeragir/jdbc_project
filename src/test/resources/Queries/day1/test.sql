@@ -9,7 +9,7 @@ where SALARY<5000;
 
 --3. How many employees have salary between 6000 and 7000?
 select count(*) from EMPLOYEES
-where SALARY>=6000 and SALARY<=7000;
+where SALARY between 6000 and 7000;
 
 --4. List all the different region_ids in countries table
 select distinct  REGION_ID as country_table from COUNTRIES;
@@ -41,17 +41,26 @@ select count(*) from DEPARTMENTS;
 select HIRE_DATE from EMPLOYEES
 order by HIRE_DATE asc ;
 
+select * from job_history order by start_date;
+select * from job_history order by start_date asc;
+
 --12. Sort the start_date in descending order in job_history's table
 select HIRE_DATE from EMPLOYEES
 order by HIRE_DATE desc ;
 
+select * from job_history order by start_date desc;
+
 --13. Display all records whose last name contains 2 lowercase 'a's
 select * from  EMPLOYEES
-where LAST_NAME like '%as%';
+where LAST_NAME like '%a%s%';
+
+select * from employees where last_name like '%a%a%';
 
 --14. Display all the employees whose first name starts with ‘A'
 select FIRST_NAME from EMPLOYEES
 where FIRST_NAME like 'A%';
+
+
 
 --15. Display all the employees whose job_ID contains ‘IT'
 select * from  EMPLOYEES
@@ -60,6 +69,10 @@ where JOB_ID like '%IT%';
 --16. Display all unique job_id that end with CLERK in employee table
 select * from  EMPLOYEES
 where JOB_ID like '%CLERK';
+
+select distinct job_id
+from employees
+where job_id like '%CLERK' ;
 
 --17.Display all employees first name starts with A and have exactly 4 characters
 select * from EMPLOYEES
@@ -83,10 +96,22 @@ where DEPARTMENT_ID not in (90,60,100,130,120);
 select JOB_ID,max(SALARY),min(SALARY),avg(SALARY) , count(*)from EMPLOYEES
 group by JOB_ID;
 
+select job_id, count(*) from employees
+where salary >= 5000
+group by job_id;
+
+select job_id, sum(salary) from employees group by job_id ;
+
 --21. display all job_id and average salary who work as any of these jobs IT_PROG,SA_REP, FI_ACCOUNT, AD_VP
 select JOB_ID ,avg(SALARY) from EMPLOYEES
 where  JOB_ID in ('IT_PROG','SA_REP', 'FI_ACCOUNT', 'AD_VP')
 group by JOB_ID;
+
+
+select job_id, avg(salary) as "average salary"
+from employees
+group by job_id
+having job_id IN ('IT_PROG', 'SA_REP', 'FI_ACCOUNT', 'AD_VP');
 
 --22.Display max salary for each department
 select DEPARTMENT_ID,max(SALARY) from EMPLOYEES
@@ -96,7 +121,9 @@ group by DEPARTMENT_ID;
 select sum(SALARY) from EMPLOYEES
 where DEPARTMENT_ID not in (50);
 
-
+select department_id, sum(salary) from employees
+group by department_id
+having sum(salary) > 30000 and department_id != 50;
 
 
 
