@@ -41,7 +41,7 @@ public class DB_UTIL {
      */
     public static void createConnection(){
 
-        String url      = "jdbc:oracle:thin:@44.201.221.73:1521:XE"; ;
+        String url      = "jdbc:oracle:thin:@3.83.82.216:1521:XE"; ;
         String username = "hr" ;
         String password = "hr" ;
 
